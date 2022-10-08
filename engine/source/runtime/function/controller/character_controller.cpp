@@ -84,12 +84,9 @@ namespace Pilot
             horizontal_displacement.length(),
             hits))
         {
-            if (hits[0].hit_distance > 0.001)
-            {
-                Vector3 tangent_direct = hits[0].hit_normal.crossProduct(hits[0].hit_normal.crossProduct(-horizontal_direction));
-                tangent_direct.normalise();
-                final_position += hits[0].hit_distance * horizontal_direction + (horizontal_displacement.length() - hits[0].hit_distance) * tangent_direct;
-            }
+            Vector3 tangent_direct = hits[0].hit_normal.crossProduct(hits[0].hit_normal.crossProduct(-horizontal_direction));
+            tangent_direct.normalise();
+            final_position += hits[0].hit_distance * horizontal_direction + (horizontal_displacement.length() - hits[0].hit_distance) * tangent_direct;
         }
         else
         {
