@@ -136,6 +136,24 @@ namespace Piccolo
                 }
             }
         };
+        m_editor_ui_creator["bool"] = [this](const std::string& name, void* value_ptr) -> void {
+            if (g_node_depth == -1)
+            {
+                std::string label = "##" + name;
+                ImGui::Text("%s", name.c_str());
+                ImGui::SameLine();
+                ImGui::Text("%s", static_cast<bool*>(value_ptr) ? "true": "false");
+            }
+            else
+            {
+                if (g_editor_node_state_array[g_node_depth].second)
+                {
+                    std::string full_label = "##" + getLeafUINodeParentLabel() + name;
+                    ImGui::Text("%s", (name + ":").c_str());
+                    ImGui::Text("%s", static_cast<bool*>(value_ptr) ? "true":"false");
+                }
+            }
+        };
         m_editor_ui_creator["float"] = [this](const std::string& name, void* value_ptr) -> void {
             if (g_node_depth == -1)
             {
