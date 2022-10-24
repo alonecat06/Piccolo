@@ -140,17 +140,18 @@ namespace Piccolo
             if (g_node_depth == -1)
             {
                 std::string label = "##" + name;
-                ImGui::Text("%s", name.c_str());
+                ImGui::Checkbox(label.c_str(), static_cast<bool*>(value_ptr));
                 ImGui::SameLine();
-                ImGui::Text("%s", static_cast<bool*>(value_ptr) ? "true": "false");
+                ImGui::Text("%s", name.c_str());
             }
             else
             {
                 if (g_editor_node_state_array[g_node_depth].second)
                 {
                     std::string full_label = "##" + getLeafUINodeParentLabel() + name;
-                    ImGui::Text("%s", (name + ":").c_str());
-                    ImGui::Text("%s", static_cast<bool*>(value_ptr) ? "true":"false");
+                    ImGui::Checkbox(full_label.c_str(), static_cast<bool*>(value_ptr));
+                    ImGui::SameLine();
+                    ImGui::Text("%s", name.c_str());
                 }
             }
         };

@@ -198,8 +198,14 @@ namespace Piccolo
     {
         Vector3 final_position;
 
-        switch (m_controller_type)
+        if (m_motor_res.m_enable_ghost_mode)
         {
+            final_position = current_position + m_desired_displacement;
+        }
+        else
+        {            
+            switch (m_controller_type)
+            {
             case ControllerType::none:
                 final_position = current_position + m_desired_displacement;
                 break;
@@ -209,6 +215,7 @@ namespace Piccolo
             default:
                 final_position = current_position;
                 break;
+            }
         }
 
         // Piccolo-hack: motor level simulating jump, character always above z-plane

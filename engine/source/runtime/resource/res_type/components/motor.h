@@ -49,12 +49,12 @@ namespace Piccolo
         float m_move_acceleration {0.f};
         float m_sprint_acceleration { 0.f};
         bool m_enable_ghost_mode {true};
-        float m_test_float { 0.f};
-        bool m_test_bool {false};
-        std::string m_test_string;
-        std::string m_test_new_string;
-        int m_test_new_int {520};
-        float m_test_new_float {2.5};
+        // float m_test_float { 0.f};
+        // bool m_test_bool {false};
+        // std::string m_test_string;
+        // std::string m_test_new_string;
+        // int m_test_new_int {520};
+        // float m_test_new_float {2.5};
 
         Reflection::ReflectionPtr<ControllerConfig> m_controller_config;
     };
