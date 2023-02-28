@@ -85,6 +85,10 @@ namespace Piccolo
         {
             g_editor_global_context.m_scene_manager->onDeleteSelectedGObject();
         }
+        if ((unsigned int)EditorCommand::refresh_shader & m_editor_command)
+        {
+            g_editor_global_context.m_render_system->refreshShader();
+        }
 
         editor_camera->move(camera_relative_pos);
     }
@@ -124,6 +128,9 @@ namespace Piccolo
                     break;
                 case GLFW_KEY_DELETE:
                     m_editor_command |= (unsigned int)EditorCommand::delete_object;
+                    break;
+                case GLFW_KEY_GRAVE_ACCENT:
+                    m_editor_command |= (unsigned int)EditorCommand::refresh_shader;
                     break;
                 default:
                     break;

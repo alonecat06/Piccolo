@@ -65,6 +65,8 @@ namespace Piccolo
 
         void clearForLevelReloading();
 
+        void refreshShader();
+
     private:
         RENDER_PIPELINE_TYPE m_render_pipeline_type {RENDER_PIPELINE_TYPE::DEFERRED_PIPELINE};
 

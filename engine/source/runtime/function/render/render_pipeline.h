@@ -15,6 +15,8 @@ namespace Piccolo
         virtual void deferredRender(std::shared_ptr<RHI>                rhi,
                                     std::shared_ptr<RenderResourceBase> render_resource) override final;
 
+        virtual void refreshShader() override final;
+
         void passUpdateAfterRecreateSwapchain();
 
         virtual uint32_t getGuidOfPickedMesh(const Vector2& picked_uv) override final;

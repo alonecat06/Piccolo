@@ -212,6 +212,11 @@ namespace Piccolo
         static_cast<ParticlePass*>(m_particle_pass.get())->simulate();
     }
 
+    void RenderPipeline::refreshShader()
+    {
+        m_color_grading_pass->refreshShader();
+    }
+
     void RenderPipeline::passUpdateAfterRecreateSwapchain()
     {
         MainCameraPass&   main_camera_pass   = *(static_cast<MainCameraPass*>(m_main_camera_pass.get()));

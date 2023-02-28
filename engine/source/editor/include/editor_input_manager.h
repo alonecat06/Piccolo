@@ -23,6 +23,7 @@ namespace Piccolo
         scale_mode       = 1 << 8,  // C
         exit             = 1 << 9,  // Esc
         delete_object    = 1 << 10, // Delete
+        refresh_shader   = 1 << 11, // Refresh shader code
     };
 
     class EditorInputManager

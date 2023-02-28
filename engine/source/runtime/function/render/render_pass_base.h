@@ -25,6 +25,8 @@ namespace Piccolo
         virtual void setCommonInfo(RenderPassCommonInfo common_info);
         virtual void preparePassData(std::shared_ptr<RenderResourceBase> render_resource);
         virtual void initializeUIRenderBackend(WindowUI* window_ui);
+        
+        virtual void refreshShader() {}
 
     protected:
         std::shared_ptr<RHI>                m_rhi;

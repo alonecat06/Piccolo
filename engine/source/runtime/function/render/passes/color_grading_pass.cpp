@@ -58,6 +58,11 @@ namespace Piccolo
 
     void ColorGradingPass::setupPipelines()
     {
+        resetPipelines(POST_PROCESS_VERT, COLOR_GRADING_FRAG);
+    }
+
+    void ColorGradingPass::resetPipelines(std::vector<unsigned char> vert_shader, std::vector<unsigned char> frag_shader)
+    {
         m_render_pipelines.resize(1);
 
         RHIDescriptorSetLayout*      descriptorset_layouts[1] = {m_descriptor_infos[0].layout};
@@ -71,8 +76,8 @@ namespace Piccolo
             throw std::runtime_error("create post process pipeline layout");
         }
 
-        RHIShader* vert_shader_module = m_rhi->createShaderModule(POST_PROCESS_VERT);
-        RHIShader* frag_shader_module = m_rhi->createShaderModule(COLOR_GRADING_FRAG);
+        RHIShader* vert_shader_module = m_rhi->createShaderModule(vert_shader);
+        RHIShader* frag_shader_module = m_rhi->createShaderModule(frag_shader);
 
         RHIPipelineShaderStageCreateInfo vert_pipeline_shader_stage_create_info {};
         vert_pipeline_shader_stage_create_info.sType  = RHI_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
@@ -268,5 +273,13 @@ namespace Piccolo
         m_rhi->cmdDraw(m_rhi->getCurrentCommandBuffer(), 3, 1, 0, 0);
 
         m_rhi->popEvent(m_rhi->getCurrentCommandBuffer());
+    }
+
+    void ColorGradingPass::refreshShader()
+    {
+        // 通过cmd调用，重新编译二进制文件
+
+        // 重新加载
+        // resetPipelines();
     }
 } // namespace Piccolo
