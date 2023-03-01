@@ -243,7 +243,7 @@ namespace Piccolo
 
     void RenderSystem::refreshShader()
     {
-        m_render_pipeline.refreshShader();
+        m_render_pipeline->refreshShader();
     }
 
     void RenderSystem::setRenderPipelineType(RENDER_PIPELINE_TYPE pipeline_type)

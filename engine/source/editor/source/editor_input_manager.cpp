@@ -173,6 +173,9 @@ namespace Piccolo
                 case GLFW_KEY_DELETE:
                     m_editor_command &= (k_complement_control_command ^ (unsigned int)EditorCommand::delete_object);
                     break;
+                case GLFW_KEY_GRAVE_ACCENT:
+                    m_editor_command &= (k_complement_control_command ^ (unsigned int)EditorCommand::refresh_shader);
+                    break;
                 default:
                     break;
             }
