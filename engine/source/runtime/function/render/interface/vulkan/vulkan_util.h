@@ -106,6 +106,8 @@ namespace Piccolo
         static VkSampler getOrCreateLinearSampler(VkPhysicalDevice physical_device, VkDevice device);
         static void      destroyNearestSampler(VkDevice device);
         static void      destroyLinearSampler(VkDevice device);
+        
+        static bool      compileShader(const RHIShaderStageFlagBits shader_type, const char* pshader, std::vector<unsigned char>& spirv_char);
 
     private:
         static std::unordered_map<uint32_t, VkSampler> m_mipmap_sampler_map;

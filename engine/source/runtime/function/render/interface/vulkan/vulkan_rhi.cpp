@@ -2768,6 +2768,21 @@ namespace Piccolo
         }
     }
 
+    bool VulkanRHI::compileShader(const RHIShaderStageFlagBits shader_type, const char* shader_path, std::vector<unsigned char>& shader_code)
+    {
+        // 读取文件
+        char* pshader = nullptr;
+        if (std::FILE* f = fopen(shader_path, "r"))
+        {
+            fseek(f, 0, SEEK_END);
+            const uint64_t size = ftell(f);
+            pshader = static_cast<char*>(calloc(size, sizeof(char)));
+            fread(pshader, size, 1, f);
+            fclose(f);
+        }
+        return VulkanUtil::compileShader(shader_type, pshader, shader_code);
+    }
+
     RHIShader* VulkanRHI::createShaderModule(const std::vector<unsigned char>& shader_code)
     {
         RHIShader* shahder = new VulkanShader();

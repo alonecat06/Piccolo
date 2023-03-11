@@ -3,6 +3,8 @@
 #include "runtime/function/render/interface/vulkan/vulkan_rhi.h"
 #include "runtime/function/render/interface/vulkan/vulkan_util.h"
 
+#include "glslang/SPIRV/GlslangToSpv.h"
+
 #include <color_grading_frag.h>
 #include <post_process_vert.h>
 
@@ -275,9 +277,19 @@ namespace Piccolo
         m_rhi->popEvent(m_rhi->getCurrentCommandBuffer());
     }
 
-    void ColorGradingPass::refreshShader()
+    void ColorGradingPass::refreshShader(std::shared_ptr<RHI> m_rhi)
     {
-        // 通过cmd调用，重新编译二进制文件
+        // 实现util函数，调用glslang::GlslangToSpv，重新编译二进制文件
+        auto vert_shader_path = std::string("../engine/shader/glsl/post_process.vert");
+        std::vector<unsigned char> vert_shader_code;
+        auto frag_shader_path = std::string("../engine/shader/glsl/color_grading.frag");
+        std::vector<unsigned char> frag_shader_code;
+        
+        if (m_rhi->compileShader(RHI_SHADER_STAGE_VERTEX_BIT, vert_shader_path.c_str(), vert_shader_code) &&
+            m_rhi->compileShader(RHI_SHADER_STAGE_FRAGMENT_BIT, frag_shader_path.c_str(), frag_shader_code))
+        {
+            resetPipelines(vert_shader_code, frag_shader_code);
+        }
 
         // 重新加载
         // resetPipelines();

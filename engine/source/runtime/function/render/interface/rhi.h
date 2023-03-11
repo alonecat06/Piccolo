@@ -36,6 +36,7 @@ namespace Piccolo
         virtual void createFramebufferImageAndView() = 0;
         virtual RHISampler* getOrCreateDefaultSampler(RHIDefaultSamplerType type) = 0;
         virtual RHISampler* getOrCreateMipmapSampler(uint32_t width, uint32_t height) = 0;
+        virtual bool compileShader(const RHIShaderStageFlagBits shader_type, const char* shader_path, std::vector<unsigned char>& shader_code) = 0;
         virtual RHIShader* createShaderModule(const std::vector<unsigned char>& shader_code) = 0;
         virtual void createBuffer(RHIDeviceSize size, RHIBufferUsageFlags usage, RHIMemoryPropertyFlags properties, RHIBuffer* &buffer, RHIDeviceMemory* &buffer_memory) = 0;
         virtual void createBufferAndInitialize(RHIBufferUsageFlags usage, RHIMemoryPropertyFlags properties, RHIBuffer*& buffer, RHIDeviceMemory*& buffer_memory, RHIDeviceSize size, void* data = nullptr, int datasize = 0) = 0;

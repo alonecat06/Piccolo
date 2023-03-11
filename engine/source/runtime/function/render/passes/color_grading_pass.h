@@ -15,7 +15,7 @@ namespace Piccolo
     public:
         void initialize(const RenderPassInitInfo* init_info) override final;
         void draw() override final;
-        void refreshShader() override final;
+        void refreshShader(std::shared_ptr<RHI> m_rhi) override final;
 
         void updateAfterFramebufferRecreate(RHIImageView* input_attachment);
         

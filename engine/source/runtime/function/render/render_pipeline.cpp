@@ -214,7 +214,7 @@ namespace Piccolo
 
     void RenderPipeline::refreshShader()
     {
-        m_color_grading_pass->refreshShader();
+        m_color_grading_pass->refreshShader(m_rhi);
     }
 
     void RenderPipeline::passUpdateAfterRecreateSwapchain()
