@@ -9,6 +9,8 @@
 #include <glslang/Public/ShaderLang.h>
 #include <glslang/SPIRV/GlslangToSpv.h>
 
+#include "DirStackFileIncluder.h"
+
 namespace Piccolo
 {
     std::unordered_map<uint32_t, VkSampler> VulkanUtil::m_mipmap_sampler_map;
@@ -1177,8 +1179,14 @@ namespace Piccolo
         shader.setStrings(shaderStrings, 1);
 
         glslang::InitializeProcess();
+
+        DirStackFileIncluder includer;
+        std::vector<std::string> IncludeDirectoryList;
+        IncludeDirectoryList.push_back("../engine/shader/include");
+        std::for_each(IncludeDirectoryList.rbegin(), IncludeDirectoryList.rend(), [&includer](const std::string& dir) {
+            includer.pushExternalLocalDirectory(dir); });
         
-        if (!shader.parse(&Resources, 100, false, messages)) {
+        if (!shader.parse(&Resources, 100, false, messages, includer)) {
             puts(shader.getInfoLog());
             puts(shader.getInfoDebugLog());
             return false;  // something didn't work
